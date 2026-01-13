@@ -25,7 +25,7 @@ if not os.path.exists(MODEL_PATH) or not os.path.exists(VECTORIZER_PATH):
     print("⬇️ Downloading ML model files...")
 
     urllib.request.urlretrieve(
-        "https://drive.google.com/file/d/10kF4Fbm2-zdEmY2FfZyzb5e7cHYkRKRp/view?usp=sharing",
+        "https://drive.google.com/uc?export=download&id=10kF4Fbm2-zdEmY2FfZyzb5e7cHYkRKRp",
         ZIP_PATH
     )
 
