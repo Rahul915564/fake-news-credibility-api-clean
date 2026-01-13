@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.env
+.venv
+venv/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# ML
+
+*.joblib
+
+# Node
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Azure
+.env.production
+
+# Ignore training data
+data/
+*.csv
+
+# Python junk
+__pycache__/
+.ipynb_checkpoints/
+
+# Secrets
+.env
+
+backend/ml/
+backend/ml/*.pkl
+backend/ml/*.zip
