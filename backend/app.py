@@ -1,8 +1,8 @@
 import os
 import zipfile
-import gdown
 import joblib
 import numpy as np
+import gdown
 
 from flask import Flask, request, jsonify
 from flask_cors import CORS
@@ -13,8 +13,8 @@ CORS(app)
 
 # ---------------- PATHS ----------------
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_DIR = os.path.join(BASE_DIR, "ml")
 
+MODEL_DIR = os.path.join(BASE_DIR, "ml")
 MODEL_PATH = os.path.join(MODEL_DIR, "model_v2.pkl")
 VECTORIZER_PATH = os.path.join(MODEL_DIR, "vectorizer_v2.pkl")
 ZIP_PATH = os.path.join(MODEL_DIR, "model_files.zip")
@@ -22,18 +22,18 @@ ZIP_PATH = os.path.join(MODEL_DIR, "model_files.zip")
 # ---------------- DOWNLOAD MODEL IF NOT EXISTS ----------------
 if not os.path.exists(MODEL_PATH):
     os.makedirs(MODEL_DIR, exist_ok=True)
-    print("⬇️ Downloading ML model files from Google Drive...")
+    print("⬇️ Downloading ML model zip from Google Drive...")
 
-    gdown.download(
-        "https://drive.google.com/uc?id=10kF4Fbm2-zdEmY2FfZyzb5e7cHYkRKRp",
-        ZIP_PATH,
-        quiet=False
-    )
+    # 👇 ONLY FILE ID (important)
+    FILE_ID = "10kF4Fbm2-zdEmY2FfZyzb5e7cHYkRKRp"
+    DRIVE_URL = f"https://drive.google.com/uc?id={FILE_ID}"
+
+    gdown.download(DRIVE_URL, ZIP_PATH, quiet=False)
 
     with zipfile.ZipFile(ZIP_PATH, "r") as zip_ref:
         zip_ref.extractall(MODEL_DIR)
 
-    print("✅ ML model ready")
+    print("✅ ML model extracted successfully")
 
 # ---------------- LOAD MODEL ----------------
 model = joblib.load(MODEL_PATH)
@@ -47,7 +47,7 @@ def get_top_words(text, vectorizer, model, top_n=5):
     indices = vec.nonzero()[1]
     word_scores = [(feature_names[i], coef[i]) for i in indices]
     word_scores = sorted(word_scores, key=lambda x: abs(x[1]), reverse=True)
-    return [w for w, s in word_scores[:top_n]]
+    return [w for w, _ in word_scores[:top_n]]
 
 # ---------------- API ----------------
 @app.route("/predict", methods=["POST"])
@@ -81,5 +81,6 @@ def predict():
         "top_words": get_top_words(combined, vectorizer, model)
     })
 
+# ---------------- MAIN ----------------
 if __name__ == "__main__":
     app.run()
