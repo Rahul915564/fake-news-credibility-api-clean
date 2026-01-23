@@ -1,18 +1,35 @@
+# 📰 Fake News Credibility Analysis System
+
+An end-to-end AI-powered system to detect fake news using **Natural Language Processing (NLP)** and **Machine Learning**, built with a clean **Flask REST API** and modern web interface.
 
 ---
 
-## 🧠 Fake News Detection – README (SHORT)
+## 🚀 Features
+- Fake vs Real news classification
+- Confidence score & risk level
+- Important keyword extraction
+- Clean REST API (`/predict`)
+- Interactive web UI
+- Production-ready ML pipeline
 
-```markdown
-# Fake News Detection using NLP 📰
+---
 
-Machine Learning project to classify news articles as Fake or Real using Natural Language Processing techniques.
-
-## Tech Stack
+## 🧠 Tech Stack
 - Python
-- NLP
-- TF-IDF
-- Logistic Regression / ML Models
+- Flask, Flask-CORS
+- Scikit-learn
+- NLP (TF-IDF, Logistic Regression)
+- Joblib
+- HTML, CSS, JavaScript
 
-## Objective
-To reduce misinformation by automatically identifying fake news content.
+---
+
+## 🧪 Model Details
+- Algorithm: Logistic Regression
+- Vectorizer: TF-IDF
+- Dataset: News articles (Real & Fake)
+- Output: Label, confidence %, risk level
+
+---
+
+## 📂 Project Structure
